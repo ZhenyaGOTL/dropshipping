@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">DropShipping</name>
+        <description multilanguage="true"></description>
+        <version>1.0.0.0</version>
+        <author>CityPeople.ru (Zhenya Ovchinnikov)</author>
+    </defaultValues>
+</config>
