@@ -11,17 +11,16 @@ class Handlers extends \RS\Event\HandlerAbstract
 
     public static function controllerExecShopAdminOrderctrlEdit($helper){
         $config = \RS\Config\Loader::byModule('dropshipping');
-        if (!empty($token)){
-            $id = $helper->url->request('id', TYPE_STRING, 0);
-            $toolbar = $helper['bottomToolbar']->getItems();
-            $toolbar->addItem(
-                    [
-                        'title' => t('Передать заказ ДРОПШИПИНГ'),
-                        'attr' => [
-                            'href' => \RS\Router\Manager::obj()->getAdminUrl('drop', ['order_id' => $id], 'dropshipping-send'),
-                            'class' => 'btn btn-alt btn-primary m-l-30'
-                        ]
-                    ]
+        if (!empty($config['token'])){
+            $request    = new \RS\Http\Request();
+            $id = $request->get('id',TYPE_INTEGER,0);
+            $helper['bottomToolbar']->addItem(
+                        new ToolbarButton\Button(\RS\Router\Manager::obj()->getAdminUrl('drop', ['order_id' => $id, 're'=>\RS\Router\Manager::obj()->getAdminUrl()], 'dropshipping-send'), t('Передать заказ ДРОПШИПИНГ'), [
+                            'noajax' => true,
+                            'attr' => [
+                                'class' => 'btn btn-alt btn-primary m-l-30',
+                            ]
+                        ])
             );
         }
     }
