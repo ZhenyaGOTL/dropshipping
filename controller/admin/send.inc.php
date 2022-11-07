@@ -17,9 +17,10 @@ class Send extends \RS\Controller\Admin\Front{
             'dsFio' => $order->user_fio,
             'dsMobPhone' => $order->user_phone,
             'dsEmail' => $order->user_email,
-            
+            'ExtOrderPaid' => 1,
+            'dsDelivery' => $order->delivery_type,
         ];
         $this->result->setSuccess(true);
-        $this->result->setSuccessText(t('Изменения успешно сохранены'));
+        $this->result->setSuccessText(t('Заказ отправлен'));
     }
 }
