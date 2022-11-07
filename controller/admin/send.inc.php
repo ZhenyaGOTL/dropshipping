@@ -18,8 +18,8 @@ class Send extends \RS\Controller\Admin\Front{
         $config = \RS\Config\Loader::byModule('dropshipping');
         $c = curl_init('http://api.ds-platforma.ru/ds_order.php');
         $post = [
-            'order' => implode(',',$products),
             'ApiKey' => $config['token'],
+            'order' => implode(',',$products),
             'TestMode' => $config['test'],
             'ExtOrderID' => $id,
             'dsFio' => $order->user_fio,
@@ -28,7 +28,7 @@ class Send extends \RS\Controller\Admin\Front{
             'ExtOrderPaid' => $order->is_payed,
             'dsDelivery' => $config['drop'.$order->delivery],
             'ExtDeliveryCost' => (int)$order->user_delivery_cost,
-            'dsPickUpId' => $order->getSelectedPvz()->id,
+            'dsPickUpId' => 'KTN1',
             
         ];
         $header = [
@@ -38,7 +38,8 @@ class Send extends \RS\Controller\Admin\Front{
         curl_setopt($c, CURLOPT_POSTFIELDS, json_encode($post));
         curl_setopt($c, CURLOPT_HTTPHEADER, $header);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-        curl_exec($c);
+        $res = curl_exec($c);
+        var_dump($res);
         curl_close($c);
         $this->result->setSuccess(true);
         $this->result->setSuccessText(t('Заказ отправлен'));
