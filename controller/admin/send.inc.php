@@ -36,7 +36,7 @@ class Send extends \RS\Controller\Admin\Front{
         ];
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_POSTFIELDS, json_encode($post));
-        curl_setopt($c, CURLOPT_HTTPHEADER, true);
+        curl_setopt($c, CURLOPT_HTTPHEADER, $header);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         curl_exec($c);
         curl_close($c);
