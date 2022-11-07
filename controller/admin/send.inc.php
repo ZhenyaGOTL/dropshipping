@@ -20,7 +20,7 @@ class Send extends \RS\Controller\Admin\Front{
         $post = [
             'order' => implode(',',$products),
             'ApiKey' => $config['token'],
-            'TestMode' => 1,
+            'TestMode' => $config['test'],
             'ExtOrderID' => $id,
             'dsFio' => $order->user_fio,
             'dsMobPhone' => $order->user_phone,

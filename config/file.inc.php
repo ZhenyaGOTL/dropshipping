@@ -7,6 +7,11 @@ class File extends \RS\Orm\ConfigObject{
         parent::_init()->append(array(
             'token' => new Type\Varchar(array(
                 'description' => t('Токен для работы с дропшиппингом')
+            )),
+            'test' => new Type\Integer(array(
+                'description' => t('Тестовый режим'),
+                'listFromArray' => [['0'=>'Выключен', '1'=>'Включен']],
+                'default' => 1,
             ))
         ));
         $delivery_type = new \Shop\Model\DeliveryApi;
