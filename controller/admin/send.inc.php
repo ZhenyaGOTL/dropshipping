@@ -17,20 +17,22 @@ class Send extends \RS\Controller\Admin\Front{
         }
         $config = \RS\Config\Loader::byModule('dropshipping');
         $c = curl_init('http://api.ds-platforma.ru/ds_order.php');
+        $user = $order->getUser();
         $post = [
             'ApiKey' => $config['token'],
             'order' => implode(',',$products),
             'TestMode' => $config['test'],
             'ExtOrderID' => $id,
-            'dsFio' => $order->user_fio,
-            'dsMobPhone' => $order->user_phone,
-            'dsEmail' => $order->user_email,
+            'dsFio' => $user->getFio(),
+            'dsMobPhone' => $user['phone'],
+            'dsEmail' => $user['e_mail'],
             'ExtOrderPaid' => $order->is_payed,
             'dsDelivery' => $config['drop'.$order->delivery],
             'ExtDeliveryCost' => (int)$order->user_delivery_cost,
             'dsPickUpId' => 'KTN1',
             
         ];
+        var_dump($post);
         $header = [
             'Content-type: application/json',
         ];
